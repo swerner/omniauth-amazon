@@ -21,6 +21,8 @@ module OmniAuth
         :scope_data => '{"alexa:all":{"productID":"sayspring_development","productInstanceAttributes":{"deviceSerialNumber":"12345"}}}'
       }
 
+      uid { raw_info }
+
       def build_access_token
         token_params = {
           :redirect_uri => callback_url.split('?').first,
