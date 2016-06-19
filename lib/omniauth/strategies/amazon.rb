@@ -17,7 +17,8 @@ module OmniAuth
       }
 
       option :authorize_params, {
-        :scope => 'profile postal_code'
+        :scope => 'profile postal_code',
+        :scope_data => '{"alexa:all":{"productID":"sayspring_development","productInstanceAttributes":{"deviceSerialNumber":"12345"}}}'
       }
 
       def build_access_token
@@ -28,21 +29,6 @@ module OmniAuth
         }
         verifier = request.params['code']
         client.auth_code.get_token(verifier, token_params)
-      end
-
-      uid { raw_info['Profile']['CustomerId'] }
-
-      info do
-        {
-          'email' => raw_info['Profile']['PrimaryEmail'],
-          'name' => raw_info['Profile']['Name']
-        }
-      end
-
-      extra do
-        {
-          'postal_code' => raw_info['Profile']['PostalCode']
-        }
       end
 
       def raw_info
